@@ -9,8 +9,8 @@ export function actionsRouter(message: RawData) {
   const [command, ...params] = message.toString().split(" ");
   switch (command.split("_")[0]) {
     case "mouse":
-      mouseAction(command, params);
-      break;
+      return mouseAction(command, params);
+    // break;
     case "draw":
       drawAction(command, params);
       break;

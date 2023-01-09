@@ -12,8 +12,11 @@ const wss = new WebSocketServer({ port });
 msgServerStart(port);
 
 wss.on("connection", (ws, request) => {
-  ws.on("message", data => actionsRouter(data));
   msgWsRequest(request);
+  ws.on("message", async (data) => {
+    const response = await actionsRouter(data);
+    if (response) ws.send(response);
+  });
 });
 
 wss.on("close", () => {
