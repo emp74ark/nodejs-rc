@@ -1,8 +1,27 @@
-import { down, left, mouse, right, up } from "@nut-tree/nut-js";
+import { config } from "dotenv";
+import WebSocket, { WebSocketServer } from "ws";
+import { msgServerStart, msgServerStop, msgWsMessage, msgWsRequest } from "./messages.js";
 
-(async () => {
-  await mouse.move(left(500));
-  await mouse.move(up(500));
-  await mouse.move(right(500));
-  await mouse.move(down(500));
-})();
+config();
+
+const port = Number(process.env.PORT) || 8080;
+
+const wss = new WebSocketServer({ port });
+
+msgServerStart(port);
+
+wss.on("connection", (ws, request) => {
+  ws.on("message", data => msgWsMessage(data));
+  msgWsRequest(request);
+});
+
+wss.on("close", () => {
+  msgServerStop();
+});
+
+process.on("SIGINT", () => {
+  wss.clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) client.close();
+  });
+  wss.close();
+});
