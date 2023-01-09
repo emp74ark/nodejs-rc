@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import WebSocket, { WebSocketServer } from "ws";
-import { msgServerStart, msgServerStop, msgWsMessage, msgWsRequest } from "./messages.js";
+import { msgServerStart, msgServerStop, msgWsRequest } from "./messages.js";
+import { actionsRouter } from "./actions.js";
 
 config();
 
@@ -11,7 +12,7 @@ const wss = new WebSocketServer({ port });
 msgServerStart(port);
 
 wss.on("connection", (ws, request) => {
-  ws.on("message", data => msgWsMessage(data));
+  ws.on("message", data => actionsRouter(data));
   msgWsRequest(request);
 });
 

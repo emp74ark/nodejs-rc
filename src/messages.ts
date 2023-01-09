@@ -12,7 +12,7 @@ export const msgServerStop = () => {
 
 export const msgWsRequest = (request: IncomingMessage) => {
   const origin = request.rawHeaders.indexOf("Origin") + 1;
-  console.log(`New request from ${request.rawHeaders[origin]}`);
+  console.log(`New connection from ${request.rawHeaders[origin]}`);
 };
 
 export const msgWsMessage = (message: RawData) => {
