@@ -10,13 +10,10 @@ export function actionsRouter(message: RawData) {
   switch (command.split("_")[0]) {
     case "mouse":
       return mouseAction(command, params);
-    // break;
     case "draw":
-      drawAction(command, params);
-      break;
-    case "print":
-      printAction(command, params);
-      break;
+      return drawAction(command, params);
+    case "prnt":
+      return printAction();
     default:
       msgWsMessage(message);
       break;
