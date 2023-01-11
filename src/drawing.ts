@@ -32,7 +32,7 @@ export async function drawAction(command: string, params: string[]) {
       await mouse.setPosition({ x: currentPosition.x + +a, y: currentPosition.y }); // start point
       await mouse.leftClick();
       await mouse.pressButton(Button.LEFT);
-      for (let point = 0; point <= 360; point += 2) {
+      for (let point = 0; point <= 360; point += 0.1) {
         const rx = Math.cos(point * Math.PI / 180) * +a;
         const ry = Math.sin(point * Math.PI / 180) * +a;
         const nextPoint = {
