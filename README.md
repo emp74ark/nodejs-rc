@@ -26,7 +26,7 @@ npm run start:dev
 
 ## Nota bene!
 
-- check if application for drawing doesn't use 's', 'r', 'c' as a shortcuts.
+- check if any other application doesn't use 's', 'r', 'c' as a global shortcuts.
 
 ## Scoring:
 
