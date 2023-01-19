@@ -7,7 +7,8 @@ enum Print {
 
 export async function printAction() {
   const { x, y } = await mouse.getPosition();
-  const region = new Region(y, x, 200, 200);
+  const region = new Region(x, y, 200, 200);
+  console.log(region);
   const type = FileType.PNG;
   const timestamp = Date.now();
   const screenshot = await screen.captureRegion(`capture-${timestamp}.png`, region, type, "./screenshots");
